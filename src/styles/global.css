@@ -114,3 +114,9 @@ body::before {
   50% { transform: scale(1.15); }
 }
 .pulse-heart { animation: pulse-heart 1.5s ease-in-out infinite; }
+
+/* Pasek demo — Przykładowa strona od stronainternetowa.biz */
+#promo-bar{position:fixed;top:0;left:0;right:0;z-index:60;height:2.25rem;display:flex;align-items:center;justify-content:center;gap:.4rem;background:#0d0d10;color:#f3f3f1;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:0 1rem;text-align:center}
+#promo-bar strong{font-weight:700}
+#promo-bar:hover{background:#16161a}
+#nav{top:2.25rem}

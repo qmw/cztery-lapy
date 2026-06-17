@@ -1,0 +1,1010 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const navLinks = [
+  { href: "#o-klinice", label: "O klinice" },
+  { href: "#uslugi", label: "Usługi" },
+  { href: "#zespol", label: "Zespół" },
+  { href: "#godziny", label: "Godziny" },
+  { href: "#opinie", label: "Opinie" },
+  { href: "#kontakt", label: "Kontakt" },
+];
+
+const services = [
+  {
+    icon: "💉",
+    title: "Profilaktyka i szczepienia",
+    desc: "Kompleksowe programy szczepień, odrobaczanie, profilaktyka przeciw pasożytom zewnętrznym i wewnętrznym. Paszport zwierzęcia i dokumentacja.",
+    price: "od 80 zł",
+    color: "orange",
+  },
+  {
+    icon: "🔬",
+    title: "Chirurgia",
+    desc: "Zabiegi chirurgiczne wykonywane przez doświadczonych specjalistów w w pełni wyposażonej sali operacyjnej z anestezjologicznym monitoringiem.",
+    price: "od 350 zł",
+    color: "teal",
+  },
+  {
+    icon: "🦷",
+    title: "Stomatologia zwierząt",
+    desc: "Przegląd jamy ustnej, usuwanie kamienia nazębnego, ekstrakcje i leczenie chorób przyzębia. Znieczulenie ogólne w standardzie.",
+    price: "od 250 zł",
+    color: "orange",
+  },
+  {
+    icon: "📡",
+    title: "USG / RTG",
+    desc: "Diagnostyka obrazowa najwyższej klasy — ultrasonografia jamy brzusznej i serca, radiografia cyfrowa. Wyniki tego samego dnia.",
+    price: "od 150 zł",
+    color: "teal",
+  },
+  {
+    icon: "🐾",
+    title: "Opieka nad seniorami",
+    desc: "Specjalny program geriatryczny dla zwierząt po 7. roku życia. Badania krwi, ocena bólu, dostosowanie diety i suplementacji.",
+    price: "od 120 zł",
+    color: "brown",
+  },
+  {
+    icon: "🏥",
+    title: "Opieka całodobowa",
+    desc: "Nasz dyżur nocny i weekendowy gwarantuje pomoc w nagłych przypadkach. Hospitalizacja i intensywna terapia 24/7.",
+    price: "od 200 zł",
+    color: "brown",
+  },
+];
+
+const team = [
+  {
+    name: "lek. wet. Anna Kowalska",
+    role: "Chirurg & Kierownik Kliniki",
+    spec: "Chirurgia tkanek miękkich, ortopedia",
+    img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80",
+    years: 12,
+    emoji: "🐕",
+  },
+  {
+    name: "lek. wet. Marek Nowak",
+    role: "Internista",
+    spec: "Choroby wewnętrzne, diagnostyka obrazowa",
+    img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
+    years: 8,
+    emoji: "🐈",
+  },
+  {
+    name: "lek. wet. Zofia Wiśniewska",
+    role: "Stomatolog weterynaryjny",
+    spec: "Stomatologia, choroby jamy ustnej",
+    img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=600&q=80",
+    years: 6,
+    emoji: "🐇",
+  },
+  {
+    name: "lek. wet. Piotr Jabłoński",
+    role: "Specjalista geriatrii",
+    spec: "Opieka nad seniorami, kardiologia",
+    img: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=600&q=80",
+    years: 10,
+    emoji: "🐾",
+  },
+];
+
+const schedule = [
+  { day: "Poniedziałek – Piątek", hours: "8:00 – 20:00" },
+  { day: "Sobota", hours: "9:00 – 17:00" },
+  { day: "Niedziela", hours: "10:00 – 15:00" },
+  { day: "Dyżur nocny (całą dobę)", hours: "📞 +48 22 456 78 90" },
+];
+
+const reviews = [
+  {
+    name: "Katarzyna M.",
+    pet: "właścicielka Maksa (labrador)",
+    text: "Niesamowity zespół! Dr Kowalska operowała naszego Maksa i efekt jest fenomenalny. Przez cały czas czułyśmy się zaopiekowane, personel cały czas informował o stanie psa. Polecam z całego serca!",
+    stars: 5,
+    avatar: "🐕",
+  },
+  {
+    name: "Tomasz W.",
+    pet: "właściciel Piratki (kot bengalski)",
+    text: "Najlepsza klinika weterynaryjna w Warszawie. Profesjonalizm na każdym kroku, nowoczesny sprzęt, a przede wszystkim prawdziwa troska o zwierzę. Mój kot nigdy nie był tak spokojny u weterynarza.",
+    stars: 5,
+    avatar: "🐈",
+  },
+  {
+    name: "Agnieszka L.",
+    pet: "właścicielka Buni (króliczka)",
+    text: "Świetna opieka nad moją Bunią po zabiegu. Dr Wiśniewska to prawdziwa fachowiec, wytłumaczyła mi wszystko szczegółowo. Gabinet jest czysty, przyjemny i zwierzęta czują się komfortowo.",
+    stars: 5,
+    avatar: "🐇",
+  },
+  {
+    name: "Rafał K.",
+    pet: "właściciel Bolka (golden retriever)",
+    text: "Korzystamy z kliniki od 5 lat i nigdy się nie zawiedliśmy. Program opieki nad seniorem dla naszego Bolka jest na najwyższym poziomie. Serdecznie polecam wszystkim miłośnikom zwierząt.",
+    stars: 5,
+    avatar: "🐾",
+  },
+];
+
+const stats = [
+  { value: 3200, label: "pacjentów rocznie", suffix: "+" },
+  { value: 15, label: "lat doświadczenia", suffix: "" },
+  { value: 98, label: "zadowolonych właścicieli", suffix: "%" },
+  { value: 24, label: "godziny dyżuru", suffix: "/7" },
+];
+---
+
+<Layout>
+  <!-- ═══════════════════════════════════════════ NAV ═══ -->
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2 group">
+          <span class="text-2xl md:text-3xl font-display font-800 text-[#2c2622] group-hover:text-[#f59e42] transition-colors duration-200">
+            Cztery<span class="text-[#f59e42]">Łapy</span>
+          </span>
+          <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden sm:block">
+            <ellipse cx="20" cy="14" rx="7" ry="9" fill="#f59e42" opacity="0.9"/>
+            <ellipse cx="44" cy="14" rx="7" ry="9" fill="#f59e42" opacity="0.9"/>
+            <ellipse cx="10" cy="30" rx="6" ry="8" fill="#f59e42" opacity="0.7"/>
+            <ellipse cx="54" cy="30" rx="6" ry="8" fill="#f59e42" opacity="0.7"/>
+            <ellipse cx="32" cy="44" rx="16" ry="14" fill="#f59e42"/>
+          </svg>
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center gap-6 lg:gap-8">
+          {navLinks.map(link => (
+            <a
+              href={link.href}
+              class="font-body font-600 text-[#2c2622] hover:text-[#f59e42] transition-colors duration-200 text-sm lg:text-base relative group"
+            >
+              {link.label}
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#f59e42] rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          ))}
+          <a
+            href="#kontakt"
+            class="bg-[#f59e42] text-white font-display font-700 px-5 py-2.5 rounded-full hover:bg-[#e08c2e] transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 text-sm lg:text-base"
+          >
+            Umów wizytę
+          </a>
+        </div>
+
+        <!-- Burger -->
+        <button id="burger" class="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-[#fde4bc] transition-colors" aria-label="Menu">
+          <span class="block w-6 h-0.5 bg-[#2c2622] rounded transition-all duration-200"></span>
+          <span class="block w-6 h-0.5 bg-[#2c2622] rounded transition-all duration-200"></span>
+          <span class="block w-4 h-0.5 bg-[#2c2622] rounded transition-all duration-200"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#fff7ec] border-t border-[#fde4bc] shadow-lg">
+      <div class="px-4 py-4 flex flex-col gap-3">
+        {navLinks.map(link => (
+          <a href={link.href} class="font-body font-600 text-[#2c2622] hover:text-[#f59e42] py-2 border-b border-[#fde4bc] transition-colors">
+            {link.label}
+          </a>
+        ))}
+        <a href="#kontakt" class="mt-2 bg-[#f59e42] text-white font-display font-700 px-5 py-3 rounded-full text-center hover:bg-[#e08c2e] transition-colors">
+          Umów wizytę
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════ HERO ═══ -->
+  <header class="relative min-h-screen flex items-center bg-[#2c2622] overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1600&q=80"
+        alt="Szczęśliwy pies w klinice"
+        class="w-full h-full object-cover"
+      />
+      <!-- Warm gradient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-r from-[#2c2622]/85 via-[#2c2622]/60 to-[#6b4f3a]/30"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#2c2622]/50 via-transparent to-transparent"></div>
+    </div>
+
+    <!-- Decorative blobs -->
+    <div class="absolute top-20 right-10 w-64 h-64 rounded-full bg-[#f59e42]/10 blur-3xl float-anim pointer-events-none"></div>
+    <div class="absolute bottom-20 right-32 w-48 h-48 rounded-full bg-[#2bb3a3]/10 blur-3xl float-anim2 pointer-events-none"></div>
+
+    <!-- Paw prints decoration -->
+    <div class="absolute top-1/3 right-8 md:right-16 lg:right-24 opacity-20 pointer-events-none hidden lg:block">
+      <svg width="200" height="300" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g transform="rotate(-15, 100, 150)">
+          <!-- Paw 1 -->
+          <ellipse cx="70" cy="30" rx="8" ry="10" fill="white" opacity="0.8"/>
+          <ellipse cx="90" cy="25" rx="8" ry="10" fill="white" opacity="0.8"/>
+          <ellipse cx="60" cy="48" rx="7" ry="9" fill="white" opacity="0.6"/>
+          <ellipse cx="100" cy="43" rx="7" ry="9" fill="white" opacity="0.6"/>
+          <ellipse cx="80" cy="58" rx="15" ry="13" fill="white"/>
+          <!-- Paw 2 -->
+          <ellipse cx="120" cy="110" rx="8" ry="10" fill="white" opacity="0.8"/>
+          <ellipse cx="140" cy="105" rx="8" ry="10" fill="white" opacity="0.8"/>
+          <ellipse cx="110" cy="128" rx="7" ry="9" fill="white" opacity="0.6"/>
+          <ellipse cx="150" cy="123" rx="7" ry="9" fill="white" opacity="0.6"/>
+          <ellipse cx="130" cy="138" rx="15" ry="13" fill="white"/>
+          <!-- Paw 3 -->
+          <ellipse cx="60" cy="200" rx="8" ry="10" fill="white" opacity="0.8"/>
+          <ellipse cx="80" cy="195" rx="8" ry="10" fill="white" opacity="0.8"/>
+          <ellipse cx="50" cy="218" rx="7" ry="9" fill="white" opacity="0.6"/>
+          <ellipse cx="90" cy="213" rx="7" ry="9" fill="white" opacity="0.6"/>
+          <ellipse cx="70" cy="228" rx="15" ry="13" fill="white"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+      <div class="max-w-2xl">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 bg-[#f59e42]/20 backdrop-blur-sm border border-[#f59e42]/40 rounded-full px-4 py-1.5 mb-6">
+          <span class="text-[#f59e42] text-sm font-600">🏆 Klinika z 15-letnim doświadczeniem</span>
+        </div>
+
+        <h1 class="font-display font-800 text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight mb-6">
+          Twój pupil<br/>
+          <span class="text-[#f59e42] relative">
+            zasługuje
+            <svg class="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 8 Q75 2 150 8 Q225 14 298 6" stroke="#2bb3a3" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
+          </span>
+          <br/>na najlepsze
+        </h1>
+
+        <p class="font-body text-lg md:text-xl text-white/80 mb-8 max-w-lg leading-relaxed">
+          W Cztery Łapy traktujemy każdego pacjenta jak członka rodziny.
+          Profesjonalna opieka, nowoczesny sprzęt i serce pełne troski — dla psów, kotów i nie tylko.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="#kontakt"
+            class="inline-flex items-center justify-center gap-2 bg-[#f59e42] text-white font-display font-700 text-lg px-8 py-4 rounded-full hover:bg-[#e08c2e] transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-1"
+          >
+            <span>🐾</span>
+            Umów wizytę
+          </a>
+          <a
+            href="#uslugi"
+            class="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm text-white font-body font-600 text-lg px-8 py-4 rounded-full border border-white/30 hover:bg-white/20 transition-all duration-200"
+          >
+            Nasze usługi →
+          </a>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="mt-12 flex flex-wrap gap-6">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">⭐</span>
+            <div>
+              <div class="font-display font-700 text-white text-lg">4.97/5</div>
+              <div class="text-white/60 text-xs">z 620 opinii</div>
+            </div>
+          </div>
+          <div class="w-px bg-white/20 self-stretch hidden sm:block"></div>
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">🏥</span>
+            <div>
+              <div class="font-display font-700 text-white text-lg">Całodobowy</div>
+              <div class="text-white/60 text-xs">dyżur i hospitalizacja</div>
+            </div>
+          </div>
+          <div class="w-px bg-white/20 self-stretch hidden sm:block"></div>
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">📍</span>
+            <div>
+              <div class="font-display font-700 text-white text-lg">Warszawa</div>
+              <div class="text-white/60 text-xs">ul. Miodowa 14</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+      <div class="flex flex-col items-center gap-2 opacity-60">
+        <span class="text-white text-xs font-body tracking-widest uppercase">Przewiń</span>
+        <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
+          <div class="w-1 h-2 bg-white/70 rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════ O KLINICE ═══ -->
+  <section id="o-klinice" class="py-20 md:py-28 bg-[#fff7ec] relative overflow-hidden">
+    <!-- Background blob -->
+    <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#fde4bc] opacity-60 blur-2xl pointer-events-none"></div>
+    <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-[#d1f5f1] opacity-40 blur-2xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+        <!-- Image mosaic -->
+        <div class="reveal-left relative">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-4">
+              <div class="rounded-3xl overflow-hidden aspect-[4/5] bg-[#fde4bc]">
+                <img
+                  src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=600&q=80"
+                  alt="Szczęśliwy pies"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div class="rounded-3xl overflow-hidden aspect-square bg-[#d1f5f1]">
+                <img
+                  src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=600&q=80"
+                  alt="Opieka weterynaryjna"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+            <div class="space-y-4 pt-8">
+              <div class="rounded-3xl overflow-hidden aspect-square bg-[#fde4bc]">
+                <img
+                  src="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?auto=format&fit=crop&w=600&q=80"
+                  alt="Kotek u weterynarza"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div class="rounded-3xl overflow-hidden aspect-[4/5] bg-[#d1f5f1]">
+                <img
+                  src="https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&w=600&q=80"
+                  alt="Gabinet weterynaryjny"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating badge -->
+          <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-xl px-6 py-4 flex items-center gap-3 border border-[#fde4bc]">
+            <span class="text-3xl pulse-heart">❤️</span>
+            <div>
+              <div class="font-display font-700 text-[#2c2622] text-lg">Z miłością do zwierząt</div>
+              <div class="text-[#6b4f3a]/70 text-sm font-body">od 2009 roku</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text content -->
+        <div class="reveal-right">
+          <div class="inline-flex items-center gap-2 bg-[#fde4bc] rounded-full px-4 py-1.5 mb-5">
+            <span class="text-[#f59e42]">🐾</span>
+            <span class="font-body font-600 text-[#6b4f3a] text-sm">O naszej klinice</span>
+          </div>
+
+          <h2 class="font-display font-800 text-4xl md:text-5xl text-[#2c2622] mb-6 leading-tight">
+            Miejsce, gdzie<br/>
+            <span class="text-[#2bb3a3]">zwierzęta</span> są<br/>
+            najważniejsze
+          </h2>
+
+          <p class="font-body text-[#6b4f3a] text-lg leading-relaxed mb-6">
+            Klinika Cztery Łapy powstała z pasji do zwierząt i przekonania, że każdy pupil zasługuje na opiekę medyczną najwyższej klasy. Od ponad 15 lat służymy mieszkańcom Warszawy, łącząc nowoczesną medycynę z ciepłym, ludzkim podejściem.
+          </p>
+
+          <p class="font-body text-[#6b4f3a]/80 text-base leading-relaxed mb-8">
+            Nasz zespół tworzą doświadczeni lekarze weterynarii — specjaliści z pasją, którzy nieustannie podnoszą kwalifikacje. Wyposażenie kliniki spełnia najwyższe standardy, a atmosfera sprawia, że nawet nerwowe zwierzęta szybko się uspokajają.
+          </p>
+
+          <!-- Feature list -->
+          <div class="grid grid-cols-2 gap-3 mb-8">
+            {[
+              "Nowoczesny sprzęt diagnostyczny",
+              "Certyfikowani specjaliści",
+              "Przyjazna atmosfera",
+              "Dyżur całodobowy",
+              "Pełna dokumentacja medyczna",
+              "Apteka weterynaryjna",
+            ].map(feat => (
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-[#2bb3a3] flex items-center justify-center flex-shrink-0">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                    <path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="font-body text-[#2c2622] text-sm">{feat}</span>
+              </div>
+            ))}
+          </div>
+
+          <a
+            href="#kontakt"
+            class="inline-flex items-center gap-2 bg-[#f59e42] text-white font-display font-700 px-7 py-3.5 rounded-full hover:bg-[#e08c2e] transition-all duration-200 shadow-md hover:-translate-y-0.5"
+          >
+            Umów wizytę 🐾
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats strip -->
+      <div class="mt-20 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-6">
+        {stats.map((stat, i) => (
+          <div class={`reveal delay-${(i + 1) * 100} bg-white rounded-3xl p-6 text-center shadow-sm border border-[#fde4bc] hover:shadow-md hover:-translate-y-1 transition-all duration-300`}>
+            <div class="font-display font-800 text-4xl md:text-5xl text-[#f59e42] mb-1">
+              <span data-count={stat.value}>0</span>{stat.suffix}
+            </div>
+            <div class="font-body text-[#6b4f3a] text-sm mt-1">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ USŁUGI ═══ -->
+  <section id="uslugi" class="py-20 md:py-28 bg-[#f5e8d0] relative overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#f59e42]/30 to-transparent"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 reveal">
+        <div class="inline-flex items-center gap-2 bg-[#fff7ec] rounded-full px-4 py-1.5 mb-5">
+          <span class="text-[#2bb3a3]">🏥</span>
+          <span class="font-body font-600 text-[#6b4f3a] text-sm">Nasze usługi</span>
+        </div>
+        <h2 class="font-display font-800 text-4xl md:text-5xl text-[#2c2622] mb-4">
+          Kompleksowa opieka<br/>
+          <span class="text-[#f59e42]">od A do Z</span>
+        </h2>
+        <p class="font-body text-[#6b4f3a] text-lg max-w-xl mx-auto">
+          Oferujemy pełen zakres usług weterynaryjnych — od rutynowych wizyt po specjalistyczne zabiegi.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((svc, i) => (
+          <div class={`reveal delay-${(i % 3 + 1) * 100} group bg-white rounded-3xl p-7 border border-[#fde4bc] hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden`}>
+            <!-- Color accent top bar -->
+            <div class={`absolute top-0 left-0 right-0 h-1 rounded-t-3xl ${svc.color === 'orange' ? 'bg-[#f59e42]' : svc.color === 'teal' ? 'bg-[#2bb3a3]' : 'bg-[#6b4f3a]'}`}></div>
+
+            <div class="flex items-start justify-between mb-5">
+              <div class={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl ${svc.color === 'orange' ? 'bg-[#fde4bc]' : svc.color === 'teal' ? 'bg-[#d1f5f1]' : 'bg-[#f5e8d0]'}`}>
+                {svc.icon}
+              </div>
+              <span class={`font-display font-700 text-sm px-3 py-1 rounded-full ${svc.color === 'orange' ? 'bg-[#fde4bc] text-[#f59e42]' : svc.color === 'teal' ? 'bg-[#d1f5f1] text-[#2bb3a3]' : 'bg-[#f5e8d0] text-[#6b4f3a]'}`}>
+                {svc.price}
+              </span>
+            </div>
+
+            <h3 class="font-display font-700 text-xl text-[#2c2622] mb-3 group-hover:text-[#f59e42] transition-colors">
+              {svc.title}
+            </h3>
+            <p class="font-body text-[#6b4f3a]/80 text-sm leading-relaxed mb-5">
+              {svc.desc}
+            </p>
+
+            <a href="#kontakt" class={`inline-flex items-center gap-1.5 font-body font-600 text-sm transition-colors ${svc.color === 'orange' ? 'text-[#f59e42] hover:text-[#e08c2e]' : svc.color === 'teal' ? 'text-[#2bb3a3] hover:text-[#229e8f]' : 'text-[#6b4f3a] hover:text-[#2c2622]'}`}>
+              Umów wizytę
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-10 text-center reveal">
+        <p class="font-body text-[#6b4f3a]/70 text-sm">
+          * Ceny orientacyjne. Dokładna wycena po konsultacji. Oferujemy plany opieki abonamentowej.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ ZESPÓŁ ═══ -->
+  <section id="zespol" class="py-20 md:py-28 bg-[#fff7ec] relative overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#d1f5f1]/50 blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 reveal">
+        <div class="inline-flex items-center gap-2 bg-[#d1f5f1] rounded-full px-4 py-1.5 mb-5">
+          <span class="text-[#2bb3a3]">👨‍⚕️</span>
+          <span class="font-body font-600 text-[#2bb3a3] text-sm">Nasz zespół</span>
+        </div>
+        <h2 class="font-display font-800 text-4xl md:text-5xl text-[#2c2622] mb-4">
+          Lekarze z sercem<br/>
+          <span class="text-[#2bb3a3]">i pasją</span>
+        </h2>
+        <p class="font-body text-[#6b4f3a] text-lg max-w-xl mx-auto">
+          Poznaj nasz zespół doświadczonych specjalistów, którzy każdego dnia dbają o zdrowie Twoich pupili.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {team.map((doc, i) => (
+          <div class={`reveal delay-${(i + 1) * 100} group relative`}>
+            <div class="bg-white rounded-3xl overflow-hidden border border-[#fde4bc] hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+              <!-- Photo -->
+              <div class="relative aspect-[4/5] bg-[#fde4bc] overflow-hidden">
+                <img
+                  src={doc.img}
+                  alt={doc.name}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#2c2622]/60 via-transparent to-transparent"></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <div class="font-display font-700 text-white text-base leading-tight">{doc.name}</div>
+                </div>
+                <!-- Emoji badge -->
+                <div class="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-xl shadow-sm">
+                  {doc.emoji}
+                </div>
+              </div>
+
+              <!-- Info -->
+              <div class="p-5">
+                <div class="font-display font-600 text-[#f59e42] text-sm mb-1">{doc.role}</div>
+                <div class="font-body text-[#6b4f3a]/80 text-xs mb-3 leading-relaxed">{doc.spec}</div>
+                <div class="flex items-center gap-1.5">
+                  <div class="w-2 h-2 rounded-full bg-[#2bb3a3]"></div>
+                  <span class="font-body text-[#2c2622] text-xs">{doc.years} lat doświadczenia</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Team note -->
+      <div class="mt-12 reveal bg-gradient-to-r from-[#2bb3a3] to-[#229e8f] rounded-3xl p-8 md:p-10 text-center text-white">
+        <div class="text-4xl mb-3">🤝</div>
+        <h3 class="font-display font-700 text-2xl md:text-3xl mb-3">Dołącz do rodziny Cztery Łapy</h3>
+        <p class="font-body text-white/80 max-w-lg mx-auto mb-6">
+          Szukamy doświadczonego lekarza weterynarii z pasją. Jeśli chcesz pracować w zespole, który naprawdę kocha to co robi — napisz do nas!
+        </p>
+        <a href="mailto:praca@czterylapy.pl" class="inline-flex items-center gap-2 bg-white text-[#2bb3a3] font-display font-700 px-7 py-3 rounded-full hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+          Aplikuj teraz →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ GODZINY ═══ -->
+  <section id="godziny" class="py-20 md:py-28 bg-[#2c2622] relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="paws" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+            <ellipse cx="20" cy="10" rx="5" ry="6" fill="white"/>
+            <ellipse cx="34" cy="10" rx="5" ry="6" fill="white"/>
+            <ellipse cx="14" cy="22" rx="4.5" ry="5.5" fill="white" opacity="0.7"/>
+            <ellipse cx="40" cy="22" rx="4.5" ry="5.5" fill="white" opacity="0.7"/>
+            <ellipse cx="27" cy="30" rx="10" ry="9" fill="white"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#paws)"/>
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+        <!-- Hours -->
+        <div class="reveal-left">
+          <div class="inline-flex items-center gap-2 bg-[#f59e42]/20 border border-[#f59e42]/30 rounded-full px-4 py-1.5 mb-6">
+            <span class="text-[#f59e42]">🕐</span>
+            <span class="font-body font-600 text-[#f59e42] text-sm">Godziny przyjęć</span>
+          </div>
+
+          <h2 class="font-display font-800 text-4xl md:text-5xl text-white mb-8">
+            Kiedy do nas<br/>
+            <span class="text-[#f59e42]">zajrzeć?</span>
+          </h2>
+
+          <div class="space-y-3">
+            {schedule.map((item, i) => (
+              <div class={`flex items-center justify-between p-5 rounded-2xl border ${i === 3 ? 'bg-[#f59e42]/20 border-[#f59e42]/40' : 'bg-white/5 border-white/10'} hover:bg-white/10 transition-colors`}>
+                <div class="flex items-center gap-3">
+                  <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style={i === 3 ? "background:#f59e42" : "background:#2bb3a3"}></span>
+                  <span class="font-body font-600 text-white text-sm md:text-base">{item.day}</span>
+                </div>
+                <span class={`font-display font-700 text-sm md:text-base ${i === 3 ? 'text-[#f59e42]' : 'text-white/80'}`}>
+                  {item.hours}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <!-- Emergency note -->
+          <div class="mt-6 bg-[#f59e42]/10 border border-[#f59e42]/30 rounded-2xl p-5">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl flex-shrink-0 mt-0.5">🚨</span>
+              <div>
+                <div class="font-display font-700 text-[#f59e42] mb-1">Nagły przypadek?</div>
+                <p class="font-body text-white/70 text-sm">Zadzwoń na nasz numer alarmowy dostępny całą dobę, 7 dni w tygodniu. Nie zostawiamy Cię samego w trudnych chwilach.</p>
+                <a href="tel:+48224567890" class="mt-2 inline-block font-display font-700 text-[#f59e42] text-lg hover:text-[#e08c2e] transition-colors">
+                  📞 +48 22 456 78 90
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="reveal-right grid grid-cols-1 gap-4">
+          <div class="bg-white/5 border border-white/10 rounded-3xl p-7 hover:bg-white/10 transition-colors">
+            <div class="text-3xl mb-3">🏠</div>
+            <h3 class="font-display font-700 text-white text-xl mb-2">Adres kliniki</h3>
+            <p class="font-body text-white/70">ul. Miodowa 14<br/>00-246 Warszawa (Śródmieście)</p>
+            <a href="#kontakt" class="mt-3 inline-block font-body font-600 text-[#2bb3a3] text-sm hover:text-[#229e8f] transition-colors">
+              Zobacz na mapie →
+            </a>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-3xl p-7 hover:bg-white/10 transition-colors">
+            <div class="text-3xl mb-3">🚗</div>
+            <h3 class="font-display font-700 text-white text-xl mb-2">Dojazd i parking</h3>
+            <p class="font-body text-white/70 text-sm leading-relaxed">
+              Metro: M1 Ratusz Arsenał (5 min pieszo). Tramwaj: 4, 13, 23 (przystanek Miodowa). Parking płatny na ulicy oraz darmowy parking dla klientów kliniki (do 2h).
+            </p>
+          </div>
+
+          <div class="bg-[#2bb3a3]/20 border border-[#2bb3a3]/40 rounded-3xl p-7">
+            <div class="text-3xl mb-3">📱</div>
+            <h3 class="font-display font-700 text-white text-xl mb-2">Kontakt szybki</h3>
+            <div class="space-y-2">
+              <a href="tel:+48224567890" class="flex items-center gap-2 text-[#2bb3a3] font-body font-600 hover:text-white transition-colors">
+                📞 +48 22 456 78 90
+              </a>
+              <a href="mailto:kontakt@czterylapy.pl" class="flex items-center gap-2 text-[#2bb3a3] font-body font-600 hover:text-white transition-colors">
+                ✉️ kontakt@czterylapy.pl
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ OPINIE ═══ -->
+  <section id="opinie" class="py-20 md:py-28 bg-[#fff7ec] relative overflow-hidden">
+    <div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-[#fde4bc] blur-3xl opacity-60 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 reveal">
+        <div class="inline-flex items-center gap-2 bg-[#fde4bc] rounded-full px-4 py-1.5 mb-5">
+          <span>⭐</span>
+          <span class="font-body font-600 text-[#6b4f3a] text-sm">Opinie właścicieli</span>
+        </div>
+        <h2 class="font-display font-800 text-4xl md:text-5xl text-[#2c2622] mb-4">
+          Co mówią o nas<br/>
+          <span class="text-[#f59e42]">właściciele pupili</span>
+        </h2>
+        <div class="flex items-center justify-center gap-1 mb-2">
+          {[1,2,3,4,5].map(() => <span class="text-[#f59e42] text-2xl">★</span>)}
+        </div>
+        <p class="font-body text-[#6b4f3a]">4.97/5 z 620+ opinii na Google</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {reviews.map((rev, i) => (
+          <div class={`reveal delay-${(i % 2 + 1) * 100} bg-white rounded-3xl p-7 border border-[#fde4bc] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative`}>
+            <!-- Quote mark -->
+            <div class="absolute top-5 right-6 text-6xl text-[#fde4bc] font-display font-800 leading-none select-none">"</div>
+
+            <!-- Stars -->
+            <div class="flex gap-0.5 mb-4">
+              {[1,2,3,4,5].map(() => <span class="text-[#f59e42] text-lg">★</span>)}
+            </div>
+
+            <p class="font-body text-[#2c2622] leading-relaxed mb-6 relative z-10">
+              "{rev.text}"
+            </p>
+
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-[#fde4bc] flex items-center justify-center text-2xl flex-shrink-0">
+                {rev.avatar}
+              </div>
+              <div>
+                <div class="font-display font-700 text-[#2c2622]">{rev.name}</div>
+                <div class="font-body text-[#6b4f3a]/70 text-xs">{rev.pet}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center reveal">
+        <a
+          href="https://g.page/czterylapy"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 border-2 border-[#f59e42] text-[#f59e42] font-display font-700 px-7 py-3.5 rounded-full hover:bg-[#f59e42] hover:text-white transition-all duration-200"
+        >
+          Przeczytaj wszystkie opinie na Google ⭐
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ KONTAKT ═══ -->
+  <section id="kontakt" class="py-20 md:py-28 bg-[#f5e8d0] relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#fde4bc] blur-3xl opacity-70 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 reveal">
+        <div class="inline-flex items-center gap-2 bg-[#fff7ec] rounded-full px-4 py-1.5 mb-5">
+          <span class="text-[#f59e42]">📅</span>
+          <span class="font-body font-600 text-[#6b4f3a] text-sm">Rejestracja online</span>
+        </div>
+        <h2 class="font-display font-800 text-4xl md:text-5xl text-[#2c2622] mb-4">
+          Umów wizytę<br/>
+          <span class="text-[#f59e42]">już dziś</span>
+        </h2>
+        <p class="font-body text-[#6b4f3a] text-lg max-w-xl mx-auto">
+          Wypełnij formularz, a skontaktujemy się z Tobą w ciągu 2 godzin w dni robocze.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-12">
+
+        <!-- Form -->
+        <div class="reveal-left bg-white rounded-3xl p-8 shadow-sm border border-[#fde4bc]">
+          <h3 class="font-display font-700 text-2xl text-[#2c2622] mb-6">Formularz rejestracji</h3>
+
+          <form class="space-y-4" onsubmit="this.innerHTML='<div class=\'text-center py-8\'><div class=\'text-5xl mb-3\'>🐾</div><div class=\'font-display font-700 text-2xl text-[#2c2622] mb-2\'>Dziękujemy!</div><p class=\'font-body text-[#6b4f3a]\'>Odezwiemy się wkrótce.</p></div>'; return false;">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-body font-600 text-[#2c2622] text-sm mb-1.5">Imię i nazwisko *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Jan Kowalski"
+                  class="w-full bg-[#fff7ec] border border-[#fde4bc] rounded-2xl px-4 py-3 font-body text-[#2c2622] placeholder-[#6b4f3a]/40 focus:outline-none focus:border-[#f59e42] focus:ring-2 focus:ring-[#f59e42]/20 transition-all"
+                />
+              </div>
+              <div>
+                <label class="block font-body font-600 text-[#2c2622] text-sm mb-1.5">Telefon *</label>
+                <input
+                  type="tel"
+                  required
+                  placeholder="+48 123 456 789"
+                  class="w-full bg-[#fff7ec] border border-[#fde4bc] rounded-2xl px-4 py-3 font-body text-[#2c2622] placeholder-[#6b4f3a]/40 focus:outline-none focus:border-[#f59e42] focus:ring-2 focus:ring-[#f59e42]/20 transition-all"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-body font-600 text-[#2c2622] text-sm mb-1.5">E-mail</label>
+              <input
+                type="email"
+                placeholder="jan@email.pl"
+                class="w-full bg-[#fff7ec] border border-[#fde4bc] rounded-2xl px-4 py-3 font-body text-[#2c2622] placeholder-[#6b4f3a]/40 focus:outline-none focus:border-[#f59e42] focus:ring-2 focus:ring-[#f59e42]/20 transition-all"
+              />
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-body font-600 text-[#2c2622] text-sm mb-1.5">Gatunek zwierzęcia *</label>
+                <select
+                  required
+                  class="w-full bg-[#fff7ec] border border-[#fde4bc] rounded-2xl px-4 py-3 font-body text-[#2c2622] focus:outline-none focus:border-[#f59e42] focus:ring-2 focus:ring-[#f59e42]/20 transition-all appearance-none cursor-pointer"
+                >
+                  <option value="" disabled selected>Wybierz...</option>
+                  <option>🐕 Pies</option>
+                  <option>🐈 Kot</option>
+                  <option>🐇 Królik</option>
+                  <option>🐹 Gryzoń</option>
+                  <option>🐦 Ptak</option>
+                  <option>🦎 Gad/Terrarium</option>
+                  <option>Inne</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-body font-600 text-[#2c2622] text-sm mb-1.5">Rodzaj wizyty</label>
+                <select
+                  class="w-full bg-[#fff7ec] border border-[#fde4bc] rounded-2xl px-4 py-3 font-body text-[#2c2622] focus:outline-none focus:border-[#f59e42] focus:ring-2 focus:ring-[#f59e42]/20 transition-all appearance-none cursor-pointer"
+                >
+                  <option>Wizyta ogólna</option>
+                  <option>Szczepienie</option>
+                  <option>Konsultacja chirurgiczna</option>
+                  <option>Stomatologia</option>
+                  <option>USG / RTG</option>
+                  <option>Senior Program</option>
+                  <option>Nagły przypadek</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-body font-600 text-[#2c2622] text-sm mb-1.5">Preferowany termin</label>
+              <input
+                type="text"
+                placeholder="np. wtorek rano, sobota po 14:00..."
+                class="w-full bg-[#fff7ec] border border-[#fde4bc] rounded-2xl px-4 py-3 font-body text-[#2c2622] placeholder-[#6b4f3a]/40 focus:outline-none focus:border-[#f59e42] focus:ring-2 focus:ring-[#f59e42]/20 transition-all"
+              />
+            </div>
+
+            <div>
+              <label class="block font-body font-600 text-[#2c2622] text-sm mb-1.5">Dodatkowe informacje</label>
+              <textarea
+                rows="3"
+                placeholder="Opisz objawy lub cel wizyty..."
+                class="w-full bg-[#fff7ec] border border-[#fde4bc] rounded-2xl px-4 py-3 font-body text-[#2c2622] placeholder-[#6b4f3a]/40 focus:outline-none focus:border-[#f59e42] focus:ring-2 focus:ring-[#f59e42]/20 transition-all resize-none"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-[#f59e42] text-white font-display font-700 text-lg px-8 py-4 rounded-full hover:bg-[#e08c2e] transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2"
+            >
+              <span>🐾</span>
+              Wyślij zgłoszenie
+            </button>
+
+            <p class="text-center font-body text-[#6b4f3a]/60 text-xs">
+              Wysyłając formularz wyrażasz zgodę na przetwarzanie danych osobowych w celu umówienia wizyty.
+            </p>
+          </form>
+        </div>
+
+        <!-- Map + contact info -->
+        <div class="reveal-right space-y-6">
+          <!-- Map -->
+          <div class="rounded-3xl overflow-hidden border border-[#fde4bc] shadow-sm h-72">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=21.005%2C52.247%2C21.025%2C52.257&layer=mapnik&marker=52.252%2C21.015"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              loading="lazy"
+              title="Mapa — Cztery Łapy Klinika Weterynaryjna"
+            ></iframe>
+          </div>
+
+          <!-- Contact cards -->
+          <div class="grid grid-cols-2 gap-4">
+            <a href="tel:+48224567890" class="bg-white rounded-2xl p-5 border border-[#fde4bc] hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group">
+              <div class="text-2xl mb-2">📞</div>
+              <div class="font-display font-700 text-[#2c2622] text-sm group-hover:text-[#f59e42] transition-colors">Telefon</div>
+              <div class="font-body text-[#6b4f3a] text-xs mt-0.5">+48 22 456 78 90</div>
+            </a>
+            <a href="mailto:kontakt@czterylapy.pl" class="bg-white rounded-2xl p-5 border border-[#fde4bc] hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group">
+              <div class="text-2xl mb-2">✉️</div>
+              <div class="font-display font-700 text-[#2c2622] text-sm group-hover:text-[#f59e42] transition-colors">E-mail</div>
+              <div class="font-body text-[#6b4f3a] text-xs mt-0.5">kontakt@czterylapy.pl</div>
+            </a>
+            <div class="bg-white rounded-2xl p-5 border border-[#fde4bc]">
+              <div class="text-2xl mb-2">📍</div>
+              <div class="font-display font-700 text-[#2c2622] text-sm">Adres</div>
+              <div class="font-body text-[#6b4f3a] text-xs mt-0.5">ul. Miodowa 14, Warszawa</div>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-[#fde4bc]">
+              <div class="text-2xl mb-2">🅿️</div>
+              <div class="font-display font-700 text-[#2c2622] text-sm">Parking</div>
+              <div class="font-body text-[#6b4f3a] text-xs mt-0.5">Bezpłatny dla klientów</div>
+            </div>
+          </div>
+
+          <!-- Social proof mini strip -->
+          <div class="bg-[#2bb3a3]/10 border border-[#2bb3a3]/30 rounded-2xl p-5 flex items-center gap-4">
+            <span class="text-4xl flex-shrink-0">🐾</span>
+            <div>
+              <div class="font-display font-700 text-[#2c2622] mb-0.5">Szybka rejestracja telefoniczna</div>
+              <p class="font-body text-[#6b4f3a] text-sm">Zadzwoń w godzinach pracy — odbierzemy i umówimy Cię w kilka minut.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ FOOTER ═══ -->
+  <footer class="bg-[#2c2622] text-white py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-10 mb-10">
+
+        <!-- Brand -->
+        <div>
+          <div class="font-display font-800 text-3xl mb-3">
+            Cztery<span class="text-[#f59e42]">Łapy</span>
+          </div>
+          <p class="font-body text-white/60 text-sm leading-relaxed mb-4">
+            Klinika weterynaryjna w Warszawie — profesjonalna opieka nad zwierzętami od 2009 roku. Twój pupil jest u nas bezpieczny.
+          </p>
+          <div class="flex gap-3">
+            <a href="#" aria-label="Facebook" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#f59e42] transition-colors text-sm">f</a>
+            <a href="#" aria-label="Instagram" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#f59e42] transition-colors text-base">📷</a>
+            <a href="#" aria-label="TikTok" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#f59e42] transition-colors text-base">▶</a>
+          </div>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <h4 class="font-display font-700 text-white mb-4">Nawigacja</h4>
+          <ul class="space-y-2">
+            {navLinks.map(link => (
+              <li>
+                <a href={link.href} class="font-body text-white/60 hover:text-[#f59e42] transition-colors text-sm flex items-center gap-2">
+                  <span class="text-[#f59e42]/50">›</span> {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Services links -->
+        <div>
+          <h4 class="font-display font-700 text-white mb-4">Usługi</h4>
+          <ul class="space-y-2">
+            {services.map(svc => (
+              <li>
+                <a href="#uslugi" class="font-body text-white/60 hover:text-[#f59e42] transition-colors text-sm flex items-center gap-2">
+                  <span class="text-[#f59e42]/50">›</span> {svc.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="font-body text-white/40 text-xs text-center md:text-left">
+          © {new Date().getFullYear()} Cztery Łapy Klinika Weterynaryjna. Wszelkie prawa zastrzeżone.
+        </p>
+
+        <!-- OBOWIĄZKOWY CREDIT -->
+        <a
+          href="https://stronainternetowa.biz"
+          target="_blank"
+          rel="noopener"
+          class="font-body text-white/50 text-xs hover:text-[#f59e42] transition-colors text-center"
+        >
+          Przykładowa strona zrobiona przez <span class="underline underline-offset-2">stronainternetowa.biz</span>
+        </a>
+
+        <div class="flex gap-4">
+          <a href="#" class="font-body text-white/40 text-xs hover:text-white/70 transition-colors">Polityka prywatności</a>
+          <a href="#" class="font-body text-white/40 text-xs hover:text-white/70 transition-colors">RODO</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  /* ── TRAP 2: Nav scrolled state ────────────────────────────────── */
+  #nav.scrolled {
+    background: color-mix(in srgb, #fff7ec 92%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid #fde4bc;
+    box-shadow: 0 2px 20px rgba(44, 38, 34, 0.08);
+  }
+
+  /* Font family application */
+  h1, h2, h3, h4,
+  .font-display {
+    font-family: "Baloo 2", cursive;
+  }
+  body,
+  p, span, a, li, input, textarea, select, button,
+  .font-body {
+    font-family: "Nunito", sans-serif;
+  }
+
+  /* Form select arrow */
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b4f3a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+
+  /* Smooth anchor scroll offset for fixed nav */
+  :target {
+    scroll-margin-top: 90px;
+  }
+</style>

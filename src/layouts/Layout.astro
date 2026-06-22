@@ -3,7 +3,7 @@ import "../styles/global.css";
 interface Props { title?: string; description?: string; }
 const {
   title = "Cztery Łapy — Klinika Weterynaryjna | Warszawa",
-  description = "Cztery Łapy to nowoczesna klinika weterynaryjna w Warszawie. Oferujemy kompleksową opiekę nad zwierzętami: profilaktykę, chirurgię, stomatologię, USG/RTG i opiekę nad seniorami. Umów wizytę online."
+  description = "Cztery Łapy to przyjazna klinika weterynaryjna w Warszawie. Kompleksowa opieka nad zwierzętami: profilaktyka, chirurgia, stomatologia, USG/RTG, opieka nad seniorami. Umów wizytę online."
 } = Astro.props;
 ---
 <!doctype html>
@@ -16,9 +16,10 @@ const {
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@500;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body class="antialiased">
+    <!-- PASEK DEMO U GÓRY (obowiązkowy) -->
     <a id="promo-bar" href="https://stronainternetowa.biz" target="_blank" rel="noopener">Przykładowa strona od <strong>stronainternetowa.biz</strong></a>
     <slot />
     <script>
@@ -46,32 +47,10 @@ const {
       const mobileMenu = document.getElementById("mobile-menu");
       burger?.addEventListener("click", () => {
         mobileMenu?.classList.toggle("hidden");
-        const icon = burger.querySelector(".burger-icon");
-        icon?.classList.toggle("open");
       });
       mobileMenu?.querySelectorAll("a").forEach((a) =>
         a.addEventListener("click", () => mobileMenu?.classList.add("hidden"))
       );
-
-      // Counter animation
-      const counters = document.querySelectorAll("[data-count]");
-      const countIo = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            const el = e.target as HTMLElement;
-            const target = parseInt(el.dataset.count || "0");
-            let current = 0;
-            const step = Math.ceil(target / 60);
-            const timer = setInterval(() => {
-              current = Math.min(current + step, target);
-              el.textContent = current.toString();
-              if (current >= target) clearInterval(timer);
-            }, 25);
-            countIo.unobserve(el);
-          }
-        });
-      }, { threshold: 0.5 });
-      counters.forEach((c) => countIo.observe(c));
     </script>
   </body>
 </html>
